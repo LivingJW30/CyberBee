@@ -1,4 +1,4 @@
-# cyberbee
+# CyberBee
 Cyber challenge for the February 23rd Hack@UCF general body meeting. Ping @Jack.py on Discord with the flag. 
 
 Flag format: hack@ucf{*flag-name*}
