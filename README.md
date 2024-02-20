@@ -16,5 +16,9 @@ Your supervisor needs you to take a look at a packet capture file taken during t
 
 Note: You only need to submit the flag but hopefully these questions can help you work your way through the challenge.
 
+##Resources
++ [Wireshark](https://www.wireshark.org/) - recommended for analyzing the pcap
++ [bWAPP](http://www.itsecgames.com/) - actually stands for Buggy Web Application and is a great resource for practicing your web exploits LEGALLY!
+
 ## Write up
 *will be updated at challenge end*
