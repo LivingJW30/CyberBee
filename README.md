@@ -29,7 +29,8 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  - On a network, information is sent via packets. Packets have a header, which includes the source, destination, and other important information, and a payload, which has the data being sent. All of this is stored as binary making it almost impossible for us to read on our own. That is where our network protocol analyzer comes in. Wireshark, or whatever else you use, allows you to not only see the orginal binary but also converts and categorizes the infromation back to being human readable. This can help us with our challenge!
 
  + SO much information...where do I start?
-  - 
+  - Once you open the pcap file you are hit with 1571 packets! This can be overwhelming. Let's start by thining down the amount of packets we have to analyze. A lot of these packets are just junk that we either can't read or is unimportant to our cause. So let's find out which ones those are.
+  - Wireshark has a cool feature in the statistics bar that will show you the number and type of protocols that were captured.
 
 
 -->
