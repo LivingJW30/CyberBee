@@ -24,7 +24,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 
 ## Write up
 
-###Initial setup
+### Initial setup
  - Download a network protocol analyzer as we must analyze this packet capture file (.pcap). I am a fan of Wireshark as it provides a nice GUI. But if you are a command line wizard tshark and tcpdump are good command line tools.
  
  - On a network, information is sent via packets. Packets have a header, which includes the source, destination, and other important information, and a payload, which has the data being sent. All of this is stored as binary making it almost impossible for us to read on our own. That is where our network protocol analyzer comes in. Wireshark, or whatever else you use, allows you to not only see the original binary but also convert and categorize the information back to being human-readable. This can help us with our challenge!
