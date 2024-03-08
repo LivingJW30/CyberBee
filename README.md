@@ -37,7 +37,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
   2. statistics > conversations: will show IPs that were communicating with each other. This could be useful when analyzing the source and target of an attack.
   3. statistics > I/O graph: will show the frequency and time of packet received in a graphical format.
 
-+ What are all these protocols?
+### What are all these protocols?
  A protocol is a guideline for data transfer throughout a network. There are tons of protocols. But let's break down the protocols in our capture using our new statistic tool. 
  - [QUIC](https://www.auvik.com/franklyit/blog/what-is-quic-protocol/): There seems to be a TON of this in our capture. But what is it? QUIC is a transport layer protocol that creates reliable, secure, and quick connections over the internet. QUIC is built off of UDP hence the quickness and uses TLS to encrypt traffic. This is evident in our capture as every time you inspect a QUIC packet you can see that the payload is protected. This may be a problem for us.
    
@@ -45,7 +45,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
    
  - [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview): Hyper Transfert Text Protocol. Now this is where things get interesting. HTTP is commonly used to send and receive data on the internet. You are probably using a similar version, HTTP Secure AKA HTTPS, to view this repo right now. Lucky for us we are dealing with an unsecure HTTP protocol. HTTP is notorious for sending data in plaintext, or text we can easily read, especially HTML files! Since we know from the challenge that the bWAPP website was hacked these HTTP packets may have something to do with the attack.
 
- +  The search is on.
+### The search is on.
 -  Now that we have narrowed down our search to a specific protocol let's clear the junk. Use Wireshark's filter bar to type the word "http" thus showing only HTTP protocols. This filter bar can also be used for tons of other display filters when analyzing captures.
 
  - We can see a smaller amount of HTTP protocols now. Some include the word ["POST"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST), what are those? A POST is a method to send data to be processed by a web server. This could be images, files, or in our case possibly this is a user submitting a post to the bWAPP blog feature. These POST requests are alternatively followed by a 200 OK response. This is the server responding to the POST request validating the recieval of the POST and sending back a response to the request. You can see that along with 200 OK responses, there seems to be (text/html). Now we are talking human-readable text!
@@ -56,7 +56,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 
  - Within the last HTTP 200 OK packet you can see what our attacker found. Searching through all of the blog posts you can see that the attacker extracted the bWAPP CEO's username and his secret string. Go ahead and copy this string, we aren't done yet.
 
- + Encryption
+### Encryption
  Welp, I am glad our CEO was smart enough to encrypt his secret. This makes no sense... WRONG! Let's break it to reveal the secret. 
 
  - I love to use [CyberChef](https://gchq.github.io/CyberChef/) as it includes tons of encryption methods. Paste the string into the "Input" box. Then use the magic wand to make CyberChef give its best guess at cracking the cipher. 
@@ -64,4 +64,4 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  - Boom, just like that we get our flag. This flag was encoded using base 64. You can tell because of the trailing "==". You can also use the "From Base64" tool on CyberChef to solve this.
 
 
-Congrats Intern! You recovered our CEO's secret. I hope the hacker didn't know his base conversions. You are sure to get a job here after college, we are going to need your help.
+**Congrats Intern! You recovered our CEO's secret. I hope the hacker didn't know his base conversions. You are sure to get a job here after college, we are going to need your help.**
