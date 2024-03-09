@@ -32,7 +32,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  + SO much information...where do I start?
   - Once you open the pcap file you are hit with 1571 packets! This can be overwhelming. Let's start by narrowing down the amount of packets we have to analyze. Many of these packets are just junk that we either can't read or are unimportant to our cause. So let's find out which ones those are.
 
-[img3proto](assets/img3proto.png)
+[Image of protocols](assets/img3proto.png)
     
   - Wireshark has tons of cool features to mess around with and narrow your search. But for now, let's focus on the statistics tab. Here are a few useful tools in the statistics tab that may help, navigate to:
   1. Statistics > Protocol Hierarchy: will show the types and number of protocols sent.
@@ -42,6 +42,8 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 ### What are all these protocols?
  A protocol is a guideline for data transfer throughout a network. There are tons of protocols. But let's break down the protocols in our capture using our new statistic tool. 
  - [QUIC](https://www.auvik.com/franklyit/blog/what-is-quic-protocol/): There seems to be a TON of this in our capture. But what is it? QUIC is a transport layer protocol that creates reliable, secure, and quick connections over the internet. QUIC is built off of UDP hence the quickness and uses TLS to encrypt traffic. This is evident in our capture as every time you inspect a QUIC packet you can see that the payload is protected. This may be a problem for us.
+ - 
+   [Three way handshake](assets/img2tcp.png)
    
  - [TCP](https://www.geeksforgeeks.org/what-is-transmission-control-protocol-tcp/): Transfer Control Protocol also takes up a decent amount of our capture. TCP is another transport layer protocol that ensures reliable connection for users. Unlike UDP, TCP employs a three-way handshake (SYN, SYN-ACK, ACK) to verify a connection between devices before data is transmitted. This causes some latency hence the reason for UDP and QUIC's...well...quickness. In Wireshark, it looks like we captured a handshake in packets 701-717. This could be useful.
    
