@@ -42,7 +42,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 ### What are all these protocols?
  A protocol is a guideline for data transfer throughout a network. There are tons of protocols. But let's break down the protocols in our capture using our new statistic tool. 
 
- [QUIC packets](assets/img1quic.png)
+   [QUIC packets](assets/img1quic.png)
  
  - [QUIC](https://www.auvik.com/franklyit/blog/what-is-quic-protocol/): There seems to be a TON of this in our capture. But what is it? QUIC is a transport layer protocol that creates reliable, secure, and quick connections over the internet. QUIC is built off of UDP hence the quickness and uses TLS to encrypt traffic. This is evident in our capture as every time you inspect a QUIC packet you can see that the payload is protected. This may be a problem for us.
 
@@ -55,8 +55,11 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 ### The search is on.
 -  Now that we have narrowed down our search to a specific protocol let's clear the junk. Use Wireshark's filter bar to type the word "http" thus showing only HTTP protocols. This filter bar can also be used for tons of other display filters when analyzing captures.
 
+  [Viewing the POST requests](assets/img4post.png)
+
  - We can see a smaller amount of HTTP protocols now. Some include the word ["POST"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST), what are those? A POST is a method to send data to be processed by a web server. This could be images, files, or in our case possibly this is a user submitting a post to the bWAPP blog feature. These POST requests are alternatively followed by a 200 OK response. This is the server responding to the POST request validating the recieval of the POST and sending back a response to the request. You can see that along with 200 OK responses, there seems to be (text/html). Now we are talking human-readable text!
 
+   [Finding the SQL Injection](assets/img5inject.png)
  - Let's analyze that POST request first to see what the user was sending to the server. As we are dealing with an attack, we want to know if anything sent to our server was malicious. Sure enough, when we inspect any of the POST packets there doesn't seem to be a friendly neighborhood blog post being sent. In the "HTML Form URL Encoded" tab on the bottom left we can see that our blog's entry seems to be Form item: "nothing', (SELECT version()))-- #". That my friend is a MySQL query and it belongs nowhere near a search bar. It appears that our attacker is carrying out an SQL Injection on our blog feature! Oh no, some Software Engineer didn't do his job right. A [SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection) is a way to abuse a database querying languages to access data in databases that shouldn't normally be accessible. 
 
  - Moving on to the 200 OK packets we can now analyze the plaintext HTML files being sent back to the user. The HTML file is the code that builds what you see on a website. Therefore, we can now see what the attacker is receiving every time he carries out a SQL Injection. Using MySQL queries, the attacker discovers an important database, lists users, and narrows his search down to our one and only CEO!
@@ -68,6 +71,8 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 
  - I love to use [CyberChef](https://gchq.github.io/CyberChef/) as it includes tons of encryption methods. Paste the string into the "Input" box. Then use the magic wand to make CyberChef give its best guess at cracking the cipher. 
 
+  [Decrypting to find the flag](assets/img6encrpyt.png)
+  
  - Boom, just like that we get our flag. This flag was encoded using base 64. You can tell because of the trailing "==". You can also use the "From Base64" tool on CyberChef to solve this.
 
 
