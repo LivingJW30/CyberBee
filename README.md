@@ -32,7 +32,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  + SO much information...where do I start?
   - Once you open the pcap file you are hit with 1571 packets! This can be overwhelming. Let's start by narrowing down the amount of packets we have to analyze. Many of these packets are just junk that we either can't read or are unimportant to our cause. So let's find out which ones those are.
 
-[img3proto.png](https://github.com/LivingJW30/CyberBee/blob/main/assets/img3proto.png)
+[img3proto](https://github.com/LivingJW30/CyberBee/blob/main/assets/img3proto.png)
     
   - Wireshark has tons of cool features to mess around with and narrow your search. But for now, let's focus on the statistics tab. Here are a few useful tools in the statistics tab that may help, navigate to:
   1. Statistics > Protocol Hierarchy: will show the types and number of protocols sent.
