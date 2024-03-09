@@ -32,7 +32,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  + SO much information...where do I start?
   - Once you open the pcap file you are hit with 1571 packets! This can be overwhelming. Let's start by narrowing down the amount of packets we have to analyze. Many of these packets are just junk that we either can't read or are unimportant to our cause. So let's find out which ones those are.
 
-[Image of protocols](assets/img3proto.png)
+![Image of protocols](assets/img3proto.png)
     
   - Wireshark has tons of cool features to mess around with and narrow your search. But for now, let's focus on the statistics tab. Here are a few useful tools in the statistics tab that may help, navigate to:
   1. Statistics > Protocol Hierarchy: will show the types and number of protocols sent.
@@ -46,7 +46,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  
  - [QUIC](https://www.auvik.com/franklyit/blog/what-is-quic-protocol/): There seems to be a TON of this in our capture. But what is it? QUIC is a transport layer protocol that creates reliable, secure, and quick connections over the internet. QUIC is built off of UDP hence the quickness and uses TLS to encrypt traffic. This is evident in our capture as every time you inspect a QUIC packet you can see that the payload is protected. This may be a problem for us.
 
-   [Three way handshake](assets/img2tcp.png)
+![Three way handshake](assets/img2tcp.png)
    
  - [TCP](https://www.geeksforgeeks.org/what-is-transmission-control-protocol-tcp/): Transfer Control Protocol also takes up a decent amount of our capture. TCP is another transport layer protocol that ensures reliable connection for users. Unlike UDP, TCP employs a three-way handshake (SYN, SYN-ACK, ACK) to verify a connection between devices before data is transmitted. This causes some latency hence the reason for UDP and QUIC's...well...quickness. In Wireshark, it looks like we captured a handshake in packets 701-717. This could be useful.
    
@@ -55,7 +55,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 ### The search is on.
 -  Now that we have narrowed down our search to a specific protocol let's clear the junk. Use Wireshark's filter bar to type the word "http" thus showing only HTTP protocols. This filter bar can also be used for tons of other display filters when analyzing captures.
 
-  [Viewing the POST requests](assets/img4post.png)
+![Viewing the POST requests](assets/img4post.png)
 
  - We can see a smaller amount of HTTP protocols now. Some include the word ["POST"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST), what are those? A POST is a method to send data to be processed by a web server. This could be images, files, or in our case possibly this is a user submitting a post to the bWAPP blog feature. These POST requests are alternatively followed by a 200 OK response. This is the server responding to the POST request validating the recieval of the POST and sending back a response to the request. You can see that along with 200 OK responses, there seems to be (text/html). Now we are talking human-readable text!
 
@@ -63,7 +63,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 
  - Moving on to the 200 OK packets we can now analyze the plaintext HTML files being sent back to the user. The HTML file is the code that builds what you see on a website. Therefore, we can now see what the attacker is receiving every time he carries out a SQL Injection. Using MySQL queries, the attacker discovers an important database, lists users, and narrows his search down to our one and only CEO!
 
- [Finding the secret](assets/img5inject.png)
+ ![Finding the secret](assets/img5inject.png)
  
  - Within the last HTTP 200 OK packet you can see what our attacker found. Searching through all of the blog posts you can see that the attacker extracted the bWAPP CEO's username and his secret string. Go ahead and copy this string, we aren't done yet.
 
@@ -72,7 +72,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 
  - I love to use [CyberChef](https://gchq.github.io/CyberChef/) as it includes tons of encryption methods. Paste the string into the "Input" box. Then use the magic wand to make CyberChef give its best guess at cracking the cipher. 
 
-  [Decrypting to find the flag](assets/img6encrpyt.png)
+![Decrypting to find the flag](assets/img6encrpyt.png)
   
  - Boom, just like that we get our flag. This flag was encoded using base 64. You can tell because of the trailing "==". You can also use the "From Base64" tool on CyberChef to solve this.
 
