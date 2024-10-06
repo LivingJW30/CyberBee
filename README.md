@@ -22,7 +22,7 @@ Note: You only need to submit the flag but hopefully these questions can help yo
 + [Wireshark](https://www.wireshark.org/) - recommended for analyzing the pcap
 + [bWAPP](http://www.itsecgames.com/) - actually stands for Buggy Web Application and is a great resource for practicing your web exploits LEGALLY!
 
-## Write up
+<!--## Write up
 
 ### Initial setup
  - Download a network protocol analyzer as we must analyze this packet capture file (.pcap). I am a fan of Wireshark as it provides a nice GUI. But if you are a command line wizard tshark and tcpdump are good command line tools.
@@ -77,4 +77,4 @@ Note: You only need to submit the flag but hopefully these questions can help yo
  - Boom, just like that we get our flag. This flag was encoded using base 64. You can tell because of the trailing "==". You can also use the "From Base64" tool on CyberChef to solve this.
 
 
-**Congrats Intern! You recovered our CEO's secret. I hope the hacker didn't know his base conversions. You are sure to get a job here after college, we are going to need your help.**
+**Congrats Intern! You recovered our CEO's secret. I hope the hacker didn't know his base conversions. You are sure to get a job here after college, we are going to need your help.**-->
